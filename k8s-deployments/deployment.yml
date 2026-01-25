@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-deployment
+  namespace: weather-app
+  labels:
+    app: weather-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-app
+  template:
+    metadata:
+      labels:
+        app: weather-app
+    spec:
+      containers:
+      - name: weather-container
+        image: danishmalik1001/weather-app:latest
+        ports:
+        - containerPort: 80
