@@ -11,8 +11,8 @@ COPY . /usr/share/nginx/html/
 # Ensure correct permissions (optional on alpine)
 RUN chown -R nginx:nginx /usr/share/nginx/html
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8000
+EXPOSE 8000
 
 # Use default nginx entrypoint/CMD (keeps it simple)
 # nginx will run in foreground because of default command in image
