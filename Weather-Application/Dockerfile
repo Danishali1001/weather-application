@@ -1,18 +1,13 @@
-# Use a small stable nginx image to serve static files
-FROM nginx:stable-alpine
+FROM node:20-alpine
 
-# Remove default nginx index (optional but keeps image clean)
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
-# Copy site files into nginx html folder
-# Assume your project has: index.html, style.css, script.js (if used), images/ folder, etc.
-COPY . /usr/share/nginx/html/
+COPY package*.json ./
 
-# Ensure correct permissions (optional on alpine)
-RUN chown -R nginx:nginx /usr/share/nginx/html
+RUN npm install
 
-# Expose port 8000
+COPY . .
+
 EXPOSE 8000
 
-# Use default nginx entrypoint/CMD (keeps it simple)
-# nginx will run in foreground because of default command in image
+CMD ["npm", "run", "dev", "--", "--host"]
